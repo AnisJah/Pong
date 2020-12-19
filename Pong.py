@@ -5,7 +5,7 @@ import turtle
 win = turtle.Screen()
 win.setup(width=800, height=600)
 win.bgcolor("black")
-win.title("Ping Pong Thing Ding Dong Chink")
+win.title("Ping Pong")
 win.tracer(0)
 
 #player 1
@@ -82,6 +82,9 @@ while True:
     if (ball.xcor()<=-390):
         ball.goto(0,0)
         ball.dx*=-1
-    if((ball.xcor()<-345)and(ball.ycor()<player1.ycor()+40)and(ball.ycor()>player1.ycor()+40)):
-        ball.setx(345)
+    if((ball.xcor()<-340)and(ball.ycor()<player1.ycor()+15)and(ball.ycor()>player1.ycor()-15)):
+        ball.setx(-340)
+        ball.dx*=-1
+    if((ball.xcor()>340)and(ball.ycor()<player2.ycor()+15)and(ball.ycor()>player2.ycor()-15)):
+        ball.setx(340)
         ball.dx*=-1
