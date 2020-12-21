@@ -38,7 +38,15 @@ ball.goto(0,0)
 ball.dx = 0.5
 ball.dy = 0.5
 
-#movement
+#score
+score = turtle.Turtle()
+score.speed(0)
+score.color("white")
+score.penup()
+score.goto(0,250)
+score.hideturtle()
+
+#funcs
 def player1up():
    y = player1.ycor()
    y+= 15
@@ -59,14 +67,17 @@ def player2down():
    y-= 15
    player2.sety(y)
 
-#score
-score = turtle.Turtle()
-score.speed(0)
-score.color("white")
-score.penup()
-score.goto(0,250)
-score.hideturtle()
-
+def winAn():
+        winner = turtle.Turtle()
+        winner.speed(0)
+        winner.color("white")
+        winner.penup()
+        winner.goto(0,0)
+        winner.hideturtle()
+        winner.write("player {} wins".format(name), align="center", font=("Courier",26,"normal"))
+        ball.color("black")
+        ball.dx = 0
+        ball.dy = 0
 
 #Keyboard
 win.listen()
@@ -77,9 +88,12 @@ win.onkeypress(player2down,"Down")
 
 while True:
     win.update()
-
+    
     ball.setx(ball.xcor()+ball.dx)
     ball.sety(ball.ycor()+ball.dy)
+
+    score.clear()    
+    score.write("{}-{}".format(player1score, player2score), align="center", font=("Courier",22,"normal"))
 
     if (ball.ycor()>=290):
         ball.sety(290)
@@ -101,9 +115,9 @@ while True:
     if((ball.xcor()>340)and(ball.ycor()<player2.ycor()+15)and(ball.ycor()>player2.ycor()-15)):
         ball.setx(340)
         ball.dx*=-1
-    score.clear()    
-    score.write("{}-{}".format(player1score, player2score),  align="center", font=("Courier",22,"normal"))
-   # if player1score==5:
-        #player1wins
-    #if player2score==5:
-        #player2wins
+    if player1score==5:
+        name = "1"
+        winAn()
+    if player2score==5:
+        name = "2"
+        winAn()
