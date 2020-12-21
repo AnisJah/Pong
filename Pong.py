@@ -1,4 +1,5 @@
 import turtle
+import time
 
 
 #window
@@ -68,16 +69,32 @@ def player2down():
    player2.sety(y)
 
 def winAn():
-        winner = turtle.Turtle()
-        winner.speed(0)
-        winner.color("white")
-        winner.penup()
-        winner.goto(0,0)
-        winner.hideturtle()
-        winner.write("player {} wins".format(name), align="center", font=("Courier",26,"normal"))
-        ball.color("black")
-        ball.dx = 0
-        ball.dy = 0
+   winner = turtle.Turtle()
+   winner.speed(0)
+   winner.color("white")
+   winner.penup()
+   winner.goto(0,0)
+   winner.hideturtle()
+   winner.write("player {} wins".format(name), align="center", font=("Courier",26,"normal"))
+   ball.color("black")
+   ball.dx = 0
+   ball.dy = 0
+
+def timer():
+   timer = turtle.Turtle()
+   timer.goto(0,0)
+   timer.penup()
+   timer.color("white")
+   timer.hideturtle()
+   timer.write("3", align="center", font=("Courier",26,"normal"))
+   time.sleep(1)
+   timer.clear()
+   timer.write("2", align="center", font=("Courier",26,"normal"))
+   time.sleep(1)
+   timer.clear()
+   timer.write("1", align="center", font=("Courier",26,"normal"))
+   time.sleep(1)
+   timer.clear()
 
 #Keyboard
 win.listen()
@@ -86,6 +103,7 @@ win.onkeypress(player1down,"s")
 win.onkeypress(player2up,"Up")
 win.onkeypress(player2down,"Down")
 
+timer()
 while True:
     win.update()
     
@@ -101,14 +119,20 @@ while True:
     if (ball.ycor()<=-290):
         ball.sety(-290)
         ball.dy *=-1
-    if (ball.xcor()>=390):
-        ball.goto(0,0)
-        ball.dx*=-1
+    if (ball.xcor()>=415):
+        player1.goto(-350,0)
+        player2.goto(350,0)
         player1score += 1
-    if (ball.xcor()<=-390):
+        timer()
         ball.goto(0,0)
         ball.dx*=-1
+    if (ball.xcor()<=-415):
+        player1.goto(-350,0)
+        player2.goto(350,0)
         player2score += 1
+        timer()
+        ball.goto(0,0)
+        ball.dx*=-1
     if((ball.xcor()<-340)and(ball.ycor()<player1.ycor()+15)and(ball.ycor()>player1.ycor()-15)):
         ball.setx(-340)
         ball.dx*=-1
